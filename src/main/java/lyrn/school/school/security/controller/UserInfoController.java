@@ -4,9 +4,11 @@ package lyrn.school.school.security.controller;
 import lyrn.school.school.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.ValidationException;
@@ -29,7 +31,7 @@ public class UserInfoController {
 
 
     @PostMapping("/user")
-    public Boolean create(@RequestBody Map<String, String> body) throws NoSuchAlgorithmException {
+    public UserInfo create(@RequestBody Map<String, String> body) throws NoSuchAlgorithmException {
         String username = body.get("username");
         if (userInfoRepository.existsByUsername(username)){
 
@@ -43,9 +45,13 @@ public class UserInfoController {
 
 String previlage = body.get("previlage");
 String permission = body.get("permission");
-userInfoRepository.save(new UserInfo(username,encodedPassword,permission,previlage));
-return true;
+return userInfoRepository.save(new UserInfo(username,encodedPassword,permission,previlage));
+
 
     }
 
+    @GetMapping("/user")
+    public List<UserInfo> getAllUsers(){
+        return userInfoRepository.findAll();
+    }
 }
