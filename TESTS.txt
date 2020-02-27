@@ -1,0 +1,49 @@
+student admission package
+#admit student ... use POST
+http://localhost:8081/admission/admit
+	
+	 {
+"username" :"helb@loan.com",
+        "firstname" : "helb",
+        "midname" : "helb",
+        "lastname":"helb",
+        "dob" : "2/12/1990",
+        "contact" : "0711547858",
+        "level" : "2",
+        "stream":"WEST",
+        "progress" : "continuing"
+	
+}
+
+response = true or false
+
+#search student by username or id ...use GET
+http://localhost:8081/admission/search/helb2@loan.com
+
+#search students by level..use GET
+http://localhost:8081/admission/searchByLevel/2
+
+#update student record...use PUT
+http://localhost:8081/admission/update/helb3@loan.com
+
+#register student for subject selection..use POST
+http://localhost:8081/subjectselection/enroll/helb3@loan.com
+{
+	"english":true,
+	
+	"biology":true,
+	"chemistry":true,
+	"cre":true
+}
+# search for single student in subjects selection...use GET
+http://localhost:8081/subjectselection/helb3@loan.com
+
+# get all students in subject selection... use GET
+http://localhost:8081/subjectselection/all
+
+# update student subject selection ..use PUT
+http://localhost:8081/subjectselection/update/helb3@loan.com
+{
+	"geography":false
+	
+}
